@@ -1,5 +1,7 @@
-const filterMe = (array) => {
-  return array
-}
+const PrefixTreeNode = require('./PrefixTreeNode.js');
+const CompleteMe = require('./CompleteMe.js');
 
-export default filterMe
+module.exports = {
+  PrefixTreeNode,
+  CompleteMe
+}
