@@ -11,7 +11,8 @@ export default class CompleteMe {
     return this.length;
   }
 
-  insert(string) {
+  insert(word) {
+    let string = word.toLowerCase();
     let stringArray = string.split('');
     let current = this;
 
@@ -69,11 +70,12 @@ export default class CompleteMe {
   suggest(string) {
     let allWordsArray = [];
     let keys = Object.keys(this.children);
+    let lowerCaseString = string.toLowerCase();
 
-    if (string && keys.includes(string.charAt(0))) {
-      let current = this.findLastNode(string);
+    if (string && keys.includes(lowerCaseString.charAt(0))) {
+      let current = this.findLastNode(lowerCaseString);
 
-      this.pushWords(string, current, allWordsArray);
+      this.pushWords(lowerCaseString, current, allWordsArray);
     }
     if (this.selected.length) {
       this.prioritizeSelected(allWordsArray);
