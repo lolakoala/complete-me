@@ -8,7 +8,7 @@ describe('Node', () => {
     node = new PrefixTreeNode('a');
   });
 
-  it('should take a vaule', () => {
+  it('should take a value', () => {
     expect(node.value).to.eq('a');
   });
 
