@@ -111,6 +111,11 @@ describe('COMPLETE ME', () => {
       expect(completion.suggest('a')).to.deep.eq(['apple']);
     });
 
+    it('should not be case sensitive', () => {
+      completion.insert('apple');
+      expect(completion.suggest('AP')).to.deep.eq(['apple']);
+    });
+
     it('should suggest nothing if given nothing matches the prefix', () => {
       completion.insert('apple');
       completion.insert('pizza');
