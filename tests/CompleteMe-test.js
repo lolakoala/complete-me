@@ -182,5 +182,21 @@ describe('COMPLETE ME', () => {
       completion.prioritizeSelected(dArray);
       expect(dArray[0]).to.eq('dog');
     });
+
+    it('shouldnt reorder the array if it does not have selected words', () => {
+      completion.select('cat');
+      expect(completion.selected).to.deep.eq(['cat']);
+      let dArray = ['do', 'doom', 'doctor', 'dog', 'doughnut'];
+
+      completion.prioritizeSelected(dArray);
+      expect(dArray[0]).to.eq('do');
+    });
+
+    it('shouldnt reorder the array if selected is empty', () => {
+      let dArray = ['do', 'doom', 'doctor', 'dog', 'doughnut'];
+
+      completion.prioritizeSelected(dArray);
+      expect(dArray[0]).to.eq('do');
+    });
   });
 });
