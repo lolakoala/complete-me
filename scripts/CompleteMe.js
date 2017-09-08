@@ -16,19 +16,28 @@ export default class CompleteMe {
     let current = this;
 
     stringArray.forEach((letter, index) => {
-      let childKeys = Object.keys(current.children);
-
-      if (!childKeys.includes(letter) && letter !== stringArray[stringArray.length]) {
-        current.children[letter] = new PrefixTreeNode(letter);
-      }
+      this.makeNewNode(current, letter);
       current = current.children[letter];
       if (index === stringArray.length - 1) {
-        current.endWord = 1;
-        this.length++;
-        return;
+        this.finishWord(current);
       }
+    });
+  }
 
-    })
+  makeNewNode(current, letter) {
+    let childKeys = Object.keys(current.children);
+
+    if (!childKeys.includes(letter)) {
+      current.children[letter] = new PrefixTreeNode(letter);
+      return true;
+    } else {
+      return false
+    }
+  }
+
+  finishWord(current) {
+    current.endWord = 1;
+    this.length++;
   }
 
   findLastNode(string) {
@@ -43,12 +52,10 @@ export default class CompleteMe {
 
   pushWords(string, current, allWordsArray) {
     let childKeys = Object.keys(current.children);
-    let newWord;
 
     for (let i = 0; i < childKeys.length; i ++) {
       let letter = childKeys[i];
-
-      newWord = string.concat(letter);
+      let newWord = string.concat(letter);
       let child = current.children[letter];
 
       if (child.endWord) {
@@ -68,7 +75,13 @@ export default class CompleteMe {
 
       this.pushWords(string, current, allWordsArray);
     }
+    if (this.selected.length) {
+      this.prioritizeSelected(allWordsArray);
+    }
+    return allWordsArray;
+  }
 
+  prioritizeSelected(allWordsArray) {
     allWordsArray.map((word, index, allWords) => {
       if (this.selected.includes(word)) {
         allWords.splice(index, 1);
