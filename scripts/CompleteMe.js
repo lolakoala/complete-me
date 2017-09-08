@@ -11,7 +11,8 @@ export default class CompleteMe {
     return this.length;
   }
 
-  insert(string) {
+  insert(word) {
+    let string = word.toLowerCase();
     let stringArray = string.split('');
     let current = this;
 
