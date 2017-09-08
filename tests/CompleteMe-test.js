@@ -42,6 +42,13 @@ describe('COMPLETE ME', () => {
           .children['e'].endWord
       ).to.eq(1);
     });
+
+    it('should not increment this.length if word already exists', () => {
+      completion.insert('cheese');
+      expect(completion.length).to.eq(1);
+      completion.insert('cheese');
+      expect(completion.length).to.eq(1);
+    });
   });
 
   describe('makeNewNode', () => {

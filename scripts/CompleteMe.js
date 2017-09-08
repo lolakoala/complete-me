@@ -18,7 +18,7 @@ export default class CompleteMe {
     stringArray.forEach((letter, index) => {
       this.makeNewNode(current, letter);
       current = current.children[letter];
-      if (index === stringArray.length - 1) {
+      if (index === stringArray.length - 1 && !current.endWord) {
         this.finishWord(current);
       }
     });
